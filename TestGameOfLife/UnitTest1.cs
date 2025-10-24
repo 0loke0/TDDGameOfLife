@@ -5,7 +5,7 @@ namespace TestGameOfLife;
 public class UnitTest1
 {
     [Fact]
-    public void Si_UnaCelulaVivaConMenosDeDosVecinas_Debe_Morir()
+    public void Si_NoEstaAgregadaUnaCelulaEnLaPosicionDada_Debe_EstarMuertaEstaPosicion()
     {
         
         //Arrange
@@ -29,6 +29,22 @@ public class UnitTest1
         //
         estaCelulaViva.Should().Be(true);
     }
+    
+    [Theory]
+    [InlineData(1,1,2,2)]
+    [InlineData(1,2,3,3)]
+    public void Si_SeAgregadaUnaUnicaCelulaEnLaPosicionDada_Debe_EstarMuertaLasCelulasEnOtrasPociciones(int ubicacionX, int ubicacionY,int ubicacionMuertaX, int ubicacionMuertaY)
+    {
+        
+        //Arrange
+        var gameOfLife = new GameOfLife(new bool[5,5]);
+        gameOfLife.AgregarCelula(ubicacionX,ubicacionY);
+        //Act
+        var estaCelulaViva = gameOfLife.saberSiCelulaEstaViva(ubicacionMuertaX, ubicacionMuertaY);
+        //Assert
+        estaCelulaViva.Should().Be(false);
+    }
+    
 }
 
 public class GameOfLife
@@ -45,11 +61,11 @@ public class GameOfLife
 
     public object saberSiCelulaEstaViva(int ubicacionX, int ubicacionY)
     { 
-        return boardGameOfLife[1,1];
+        return boardGameOfLife[ubicacionX,ubicacionY];
     }
 
     public void AgregarCelula(int ubicacionX, int ubicacionY)
     { 
-        boardGameOfLife[1, 1] = true;
+        boardGameOfLife[ubicacionX, ubicacionY] = true;
     }
 }

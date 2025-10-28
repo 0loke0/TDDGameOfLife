@@ -108,7 +108,7 @@ public class GameOfLife
                     continue;
                 }
 
-                if (boardGameOfLife[x + 1, y] || boardGameOfLife[x - 1, y] || boardGameOfLife[x, y + 1] || boardGameOfLife[x, y - 1] || boardGameOfLife[x - 1, y - 1] || boardGameOfLife[x + 1, y + 1] || boardGameOfLife[x + 1, y - 1])
+                if (ObtenerCantidadDeCelulasVecinas(x,y) >= 2)
                 {
                     boardGameOfLifeSiguienteGeneracion[x,y] = true;
                 }
@@ -140,6 +140,19 @@ public class GameOfLife
         return boardGameOfLife.GetLength(1) - 1;
     }
 
+    public int ObtenerCantidadDeCelulasVecinas(int ubicacionCelulaX,int ubicacionCelulaY)
+    {
+        int contadorCelulasVecinas = 0;
+        if (boardGameOfLife[ubicacionCelulaX + 1, ubicacionCelulaY]) contadorCelulasVecinas++;
+        if (boardGameOfLife[ubicacionCelulaX - 1, ubicacionCelulaY]) contadorCelulasVecinas++;
+        if (boardGameOfLife[ubicacionCelulaX, ubicacionCelulaY + 1] )  contadorCelulasVecinas ++;
+        if (boardGameOfLife[ubicacionCelulaX, ubicacionCelulaY - 1] )  contadorCelulasVecinas ++;
+        if (boardGameOfLife[ubicacionCelulaX - 1, ubicacionCelulaY - 1] )  contadorCelulasVecinas ++;
+        if (boardGameOfLife[ubicacionCelulaX + 1, ubicacionCelulaY + 1] )  contadorCelulasVecinas ++;
+        if (boardGameOfLife[ubicacionCelulaX + 1, ubicacionCelulaY - 1] )  contadorCelulasVecinas ++;
+        if (boardGameOfLife[ubicacionCelulaX - 1, ubicacionCelulaY + 1] )  contadorCelulasVecinas ++;
+        
+        return contadorCelulasVecinas; 
+    }
 
-    
 }
